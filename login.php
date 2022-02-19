@@ -1,5 +1,5 @@
 <?php
-	mb_internal_encoding('utf-8');
+	// mb_internal_encoding('utf-8');
 
 	//Subform was submited
 	if ( !empty($_POST) ) {

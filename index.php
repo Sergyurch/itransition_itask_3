@@ -1,5 +1,5 @@
 <?php
-	mb_internal_encoding('utf-8');
+	// mb_internal_encoding('utf-8');
 	session_start();
 
 	//No authentification or clicked logout
