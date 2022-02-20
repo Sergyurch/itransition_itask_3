@@ -8,7 +8,7 @@
 		try {
 
 			// $dbh = new mysqli('us-cdbr-east-05.cleardb.net', 'b7ecca645b3490', 'ec42b495', 'heroku_cb4f6467da51eac');
-			$dbh = new PDO('mysql: host=localhost:8889; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
+			$dbh = new PDO('mysql: host=127.0.0.1:3306; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 
