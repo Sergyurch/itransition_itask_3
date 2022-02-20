@@ -1,6 +1,6 @@
 <?php
 	// mb_internal_encoding('utf-8');
-	phpinfo();
+	
 	error_reporting(E_ALL);
 
 	//Subform was submited
