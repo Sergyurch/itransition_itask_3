@@ -1,68 +1,31 @@
 <?php
-	// mb_internal_encoding('utf-8');
-	
-	error_reporting(E_ALL);
-
 	//Subform was submited
 	if ( !empty($_POST) ) {
-		try {
+		$dbh = new PDO('mysql:host=us-cdbr-east-05.cleardb.net; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
+		$email = $_POST['email'];
+		$password = $_POST['password'];
 
-			// $dbh = new mysqli('us-cdbr-east-05.cleardb.net', 'b7ecca645b3490', 'ec42b495', 'heroku_cb4f6467da51eac');
-			$dbh = new PDO('mysql: host=127.0.0.1:3306; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
-			$email = $_POST['email'];
-			$password = $_POST['password'];
-
-			$sth = $dbh->query("SELECT * FROM users WHERE email = '$email'");
-			$sth->setFetchMode(PDO::FETCH_ASSOC);
-			$user = $sth->fetch();
-			// $user = $sth->fetch_assoc();
-			// var_dump($user);
+		$sth = $dbh->query("SELECT * FROM users WHERE email = '$email'");
+		$sth->setFetchMode(PDO::FETCH_ASSOC);
+		$user = $sth->fetch();
 		
-			//User was found in the database
-			if ($user) {
-				if ($user['password'] != $password) {
-					$wrong_password = true;
-				} else if ($user['is_blocked']) {
-					$user_blocked = true;
-				} else {
-					$current_datetime = date('Y-m-d H:i:s');
-					$sth = $dbh->prepare("UPDATE users SET last_login_date='$current_datetime' WHERE id='{$user['id']}'");
-					$sth->execute();
-					session_start();
-					$_SESSION['user_id'] = $user['id'];
-					$_SESSION['name'] = $user['name'];
-					header('Location: index.php');
-					exit();
-				}
+		//User was found in the database
+		if ($user) {
+			if ($user['password'] != $password) {
+				$wrong_password = true;
+			} else if ($user['is_blocked']) {
+				$user_blocked = true;
+			} else {
+				$current_datetime = date('Y-m-d H:i:s');
+				$sth = $dbh->prepare("UPDATE users SET last_login_date='$current_datetime' WHERE id='{$user['id']}'");
+				$sth->execute();
+				session_start();
+				$_SESSION['user_id'] = $user['id'];
+				$_SESSION['name'] = $user['name'];
+				header('Location: index.php');
+				exit();
 			}
-		} catch (\Exception $e) {
-		    echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
 		}
-		
-		// $email = $_POST['email'];
-		// $password = $_POST['password'];
-
-		// $sth = $dbh->query("SELECT * FROM users WHERE email = '$email'");
-		// $sth->setFetchMode(PDO::FETCH_ASSOC);
-		// $user = $sth->fetch();
-		
-		// //User was found in the database
-		// if ($user) {
-		// 	if ($user['password'] != $password) {
-		// 		$wrong_password = true;
-		// 	} else if ($user['is_blocked']) {
-		// 		$user_blocked = true;
-		// 	} else {
-		// 		$current_datetime = date('Y-m-d H:i:s');
-		// 		$sth = $dbh->prepare("UPDATE users SET last_login_date='$current_datetime' WHERE id='{$user['id']}'");
-		// 		$sth->execute();
-		// 		session_start();
-		// 		$_SESSION['user_id'] = $user['id'];
-		// 		$_SESSION['name'] = $user['name'];
-		// 		header('Location: index.php');
-		// 		exit();
-		// 	}
-		// }
 	}
 ?>
 <!DOCTYPE html>

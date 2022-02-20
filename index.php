@@ -1,7 +1,4 @@
 <?php
-	// mb_internal_encoding('utf-8');
-	
-	error_reporting(E_ALL);
 	session_start();
 
 	//No authentification or clicked logout
@@ -12,7 +9,7 @@
 		$users_id = implode(',', $_GET['users_id']);
 	}
 
-	$dbh = new PDO('mysql: host=us-cdbr-east-05.cleardb.net; dbname=heroku_cb4f6467da51eac', 'b7ecca645b3490', 'ec42b495');
+	$dbh = new PDO('mysql:host=us-cdbr-east-05.cleardb.net; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
 
 	//Delete action
 	if ( isset($_GET['delete']) ) {
