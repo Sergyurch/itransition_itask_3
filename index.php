@@ -11,7 +11,7 @@
 		$users_id = implode(',', $_GET['users_id']);
 	}
 
-	$dbh = new PDO('mysql: host=localhost; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
+	$dbh = new PDO('mysql: host=127.0.0.1; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
 
 	//Delete action
 	if ( isset($_GET['delete']) ) {

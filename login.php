@@ -4,7 +4,7 @@
 
 	//Subform was submited
 	if ( !empty($_POST) ) {
-		$dbh = new PDO('mysql: host=localhost; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
+		$dbh = new PDO('mysql: host=127.0.0.1; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
