@@ -1,17 +1,22 @@
 <?php
 	// mb_internal_encoding('utf-8');
+	phpinfo();
 	error_reporting(E_ALL);
 
 	//Subform was submited
 	if ( !empty($_POST) ) {
 		try {
-			$dbh = new PDO('mysql: host=127.0.0.1; dbname=heroku_cb4f6467da51eac', 'b7ecca645b3490', 'ec42b495');
+
+			// $dbh = new mysqli('us-cdbr-east-05.cleardb.net', 'b7ecca645b3490', 'ec42b495', 'heroku_cb4f6467da51eac');
+			$dbh = new PDO('mysql: host=us-cdbr-east-05.cleardb.net; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 
 			$sth = $dbh->query("SELECT * FROM users WHERE email = '$email'");
 			$sth->setFetchMode(PDO::FETCH_ASSOC);
 			$user = $sth->fetch();
+			// $user = $sth->fetch_assoc();
+			// var_dump($user);
 		
 			//User was found in the database
 			if ($user) {
@@ -72,10 +77,10 @@
 			<?php if ( isset($user) && !$user ): ?>
 				<div class="text-center text-danger p-5">Такого пользователя не существует</div>
 			<?php endif; ?>
-			<?php if ( $wrong_password ): ?>
+			<?php if ( isset($wrong_password) ): ?>
 				<div class="text-center text-danger p-5">Неправильный пароль</div>
 			<?php endif; ?>
-			<?php if ( $user_blocked ): ?>
+			<?php if ( isset($user_blocked) ): ?>
 				<div class="text-center text-danger p-5">Пользователь заблокирован</div>
 			<?php endif; ?>
 			<?php if ( isset($_GET['registration']) ): ?>
