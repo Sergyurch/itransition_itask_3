@@ -1,7 +1,4 @@
 <?php
-	// mb_internal_encoding('utf-8');
-	error_reporting(E_ALL);
-
 	//Subform was submited
 	if ( !empty($_POST) ) {
 		$dbh = new PDO('mysql:host=us-cdbr-east-05.cleardb.net; dbname=heroku_cb4f6467da51eac; charset=utf8', 'b7ecca645b3490', 'ec42b495');
